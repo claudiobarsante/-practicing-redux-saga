@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import { IProduct } from "./../store/modules/cart/types";
-import { useDispatch } from "react-redux";
-import { addProductToCart } from "../store/modules/cart/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductToCartRequest } from "../store/modules/cart/actions";
+import { IState } from "../store";
 
 interface IProps {
   product: IProduct;
@@ -10,8 +11,13 @@ interface IProps {
 const CatalogItem: React.FC<IProps> = ({ product }) => {
   const dispatch = useDispatch();
 
+  //use selector 1 parametro formato global do state e o 2 é o tipo do retorno
+  const isOutOfStock = useSelector<IState, boolean>((state) => {
+    return state.cart.outOfStock.includes(product.id);
+  });
+
   const handleAddproductToCart = useCallback(() => {
-    dispatch(addProductToCart(product));
+    dispatch(addProductToCartRequest(product));
   }, [dispatch, product]);
 
   return (
@@ -22,6 +28,7 @@ const CatalogItem: React.FC<IProps> = ({ product }) => {
       <button type='button' onClick={handleAddproductToCart}>
         Comprar
       </button>
+      {isOutOfStock && <span style={{ color: "red" }}>Out of stock</span>}
     </article>
   );
 };

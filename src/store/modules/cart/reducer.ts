@@ -1,9 +1,11 @@
 import { Reducer } from "redux";
 import produce from "immer";
 import { ICartState } from "./types";
+import { ActionTypes } from "./actions";
 
 const INITIAL_STATE: ICartState = {
   items: [],
+  outOfStock: [],
 };
 
 //usando o immer não preciso mais usar o spread operator
@@ -30,7 +32,7 @@ const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
 const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft) => {
     switch (action.type) {
-      case "ADD_PRODUCT_TO_CART":
+      case ActionTypes.addProductToCartSuccess:
         const { product } = action.payload;
         const productInCartIndex = draft.items.findIndex((item) => item.product.id === product.id);
 
@@ -43,7 +45,9 @@ const cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
           });
         }
         break;
-
+      case ActionTypes.addProductToCartFailure:
+        draft.outOfStock.push(action.payload.productId);
+        break;
       default:
         return draft;
     }
