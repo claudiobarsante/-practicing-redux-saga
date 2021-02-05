@@ -5,9 +5,10 @@ import {
   addProductToCartRequest,
   addProductToCartSuccess,
 } from "./actions";
-import { IState } from "./../../index";
-import api from "./../../../services/api";
+
+import api from "../../services/api";
 import { AxiosResponse } from "axios";
+import { IState } from "..";
 
 /*
 o '*' significa que a função é um generator, como se mais ou menos um async

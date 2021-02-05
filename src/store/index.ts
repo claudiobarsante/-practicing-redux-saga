@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./modules/rootReducer";
-import { ICartState } from "./modules/cart/types";
+import rootReducer from "./rootReducer";
+import { ICartState } from "./cart/types";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./modules/rootSaga";
+import rootSaga from "./rootSaga";
 
+//cart é o reducer(tem q colocar o mesmo nome q colocou lá no combineReducers) e ICartState é o tipo do state
+//vai precisar disso p usar o useSelector e select
 export interface IState {
   cart: ICartState;
 }
