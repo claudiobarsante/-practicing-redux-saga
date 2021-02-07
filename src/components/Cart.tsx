@@ -1,13 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ICartItem } from "../store/cart/types";
 import { IState } from "./../store/index";
+import { removeProductFromCart } from "./../store/cart/actions";
 
 const Cart: React.FC = () => {
-  const test = useSelector<IState>((state) => state);
-  console.log("test , ", test);
   const cart = useSelector<IState, ICartItem[]>((state) => state.cart.items);
+  const dispatch = useDispatch();
 
+  const handleDelete = useCallback(
+    (product) => {
+      dispatch(removeProductFromCart(product));
+    },
+    [dispatch]
+  );
   return (
     <table>
       <thead>
@@ -26,6 +32,11 @@ const Cart: React.FC = () => {
               <td>{item.product.price}</td>
               <td>{item.quantity}</td>
               <td>{(item.product.price * item.quantity).toFixed(2)}</td>
+              <td>
+                <button type='button' onClick={() => handleDelete(item.product)}>
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
       </tbody>

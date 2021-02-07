@@ -4,6 +4,7 @@ export enum ActionTypes {
   addProductToCartRequest = "ADD_PRODUCT_TO_CART_REQUEST",
   addProductToCartSuccess = "ADD_PRODUCT_TO_CART_SUCCESS",
   addProductToCartFailure = "ADD_PRODUCT_TO_CART_FAILURE",
+  removeProductFromCart = "REMOVE_PRODUCT_FROM_CART",
 }
 
 export function addProductToCartRequest(product: IProduct) {
@@ -30,5 +31,12 @@ export function addProductToCartFailure(productId: number) {
     payload: {
       productId,
     },
+  };
+}
+
+export function removeProductFromCart(product: IProduct) {
+  return {
+    type: ActionTypes.removeProductFromCart,
+    payload: { product },
   };
 }

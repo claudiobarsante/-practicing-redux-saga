@@ -23,6 +23,7 @@ type StockResponse = {
   id: number;
   quantity: number;
 };
+
 function* checkProductStock(action: CheckProductStockRequest) {
   const { product } = action.payload;
 

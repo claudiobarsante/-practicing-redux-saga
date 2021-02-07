@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
 
-//cart é o reducer(tem q colocar o mesmo nome q colocou lá no combineReducers) e ICartState é o tipo do state
+// a propriedade cart é o reducer(tem q colocar o mesmo nome q colocou lá no combineReducers) e ICartState é o tipo do state
 //vai precisar disso p usar o useSelector e select
 export interface IState {
   cart: ICartState;
